@@ -1,0 +1,92 @@
+import java.util.Stack;
+
+class Book {
+    String title;
+    String author;
+    String isbn;
+
+    public Book(String title, String author, String isbn) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+    }
+    
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+}
+
+class BookStack {
+    private Stack<Book> stack;
+
+    public BookStack() {
+        stack = new Stack<>();
+    }
+
+    public void push(Book book) {
+        stack.push(book);
+    }
+
+    public Book pop() {
+        return stack.pop();
+    }
+
+    public boolean isEmpty() {
+        return stack.isEmpty();
+    }
+
+    public int size() {
+        return stack.size();
+    }
+
+    public Book peek() {
+        return stack.peek();
+    }
+
+    public void reportBookTitles() {
+        System.out.println("Titles of Books in the Stack:");
+        Stack<Book> tempStack = new Stack<>();
+        while (!stack.isEmpty()) {
+            Book book = stack.pop();
+            System.out.println("Title: " + book.title + ", Author: " + book.author + ", ISBN: " + book.isbn);
+            tempStack.push(book);
+        }
+        while (!tempStack.isEmpty()) {
+            stack.push(tempStack.pop());
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BookStack bookStack = new BookStack();
+        
+        Book book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", "978-0141182636");
+        Book book2 = new Book("To Kill a Mockingbird", "Harper Lee", "978-0061120084");
+        Book book3 = new Book("1984", "George Orwell", "978-0451524935");
+        Book book4 = new Book("Brave New World", "Aldous Huxley", "978-0060850524");
+        Book book5 = new Book("Pride and Prejudice", "Jane Austen", "978-0141439518");
+        Book book6 = new Book("The Catcher in the Rye", "J.D. Salinger", "978-0316769488");
+        Book book7 = new Book("The Lord of the Rings", "J.R.R. Tolkien", "978-0618640157");
+        Book book8 = new Book("To the Lighthouse", "Virginia Woolf", "978-0156907392");
+        Book book9 = new Book("Moby-Dick", "Herman Melville", "978-0142437247");
+        Book book10 = new Book("The Odyssey", "Homer", "978-0140268867");
+
+        bookStack.push(book1);
+        bookStack.push(book2);
+        bookStack.push(book3);
+        bookStack.push(book4);
+        bookStack.push(book5);
+        bookStack.push(book6);
+        bookStack.push(book7);
+        bookStack.push(book8);
+        bookStack.push(book9);
+        bookStack.push(book10);
+
+        bookStack.reportBookTitles();
+    }
+}
