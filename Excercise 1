@@ -1,0 +1,89 @@
+class Node {
+    Student data;
+    Node next;
+    Node prev;
+
+    public Node(Student student) {
+        data = student;
+        next = null;
+        prev = null;
+    }
+}
+
+class Student {
+    String name;
+    int id;
+    int grade;
+
+    public Student(String name, int id, int grade) {
+        this.name = name;
+        this.id = id;
+        this.grade = grade;
+    }
+}
+
+class LinkedList {
+    Node head;
+
+    public void addStudent(Student student) {
+        Node newNode = new Node(student);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+            newNode.prev = current;
+        }
+    }
+
+    public void displayStudentsForward() {
+        Node current = head;
+        while (current != null) {
+            Student student = current.data;
+            System.out.println("Name: " + student.name);
+            System.out.println("ID: " + student.id);
+            System.out.println("Grade: " + student.grade);
+            System.out.println("----------------------");
+            current = current.next;
+        }
+    }
+
+    public void displayStudentsBackward() {
+        Node current = head;
+        while (current != null && current.next != null) {
+            current = current.next;
+        }
+
+        while (current != null) {
+            Student student = current.data;
+            System.out.println("Name: " + student.name);
+            System.out.println("ID: " + student.id);
+            System.out.println("Grade: " + student.grade);
+            System.out.println("----------------------");
+            current = current.prev;
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+
+        Student student1 = new Student("Navu", 101, 85);
+        Student student2 = new Student("Daman", 102, 92);
+        Student student3 = new Student("Navjot", 103, 78);
+
+        list.addStudent(student1);
+        list.addStudent(student2);
+        list.addStudent(student3);
+
+        System.out.println("Forward Order:");
+        list.displayStudentsForward();
+
+        System.out.println("\nBackward Order:");
+        list.displayStudentsBackward();
+    }
+}
