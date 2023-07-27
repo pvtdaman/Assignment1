@@ -1,0 +1,58 @@
+class Scholar {
+    String fullName;
+    float score;
+
+    public Scholar(String fullName, float score) {
+        this.fullName = fullName;
+        this.score = score;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public float getScore() {
+        return score;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedList<Scholar> scholarList = new LinkedList<>();
+        
+        Scholar scholar1 = new Scholar("Mike", 80.5f);
+        Scholar scholar2 = new Scholar("Lily", 90.2f);
+        Scholar scholar3 = new Scholar("Tom", 75.8f);
+        
+        scholarList.add(scholar1);
+        scholarList.add(scholar2);
+        scholarList.add(scholar3);
+
+        float scoreThreshold = 80.0f;
+        LinkedList<Scholar> scholarsAboveThreshold = retrieveScholars(scholarList, scoreThreshold);
+
+        System.out.println("Scholars with scores above " + scoreThreshold + ":");
+        printScholars(scholarsAboveThreshold);
+
+        System.out.println("\nAll scholars:");
+        printScholars(scholarList);
+    }
+
+    public static LinkedList<Scholar> retrieveScholars(LinkedList<Scholar> scholarList, float scoreThreshold) {
+        LinkedList<Scholar> scholarsAboveThreshold = new LinkedList<>();
+
+        for (Scholar scholar : scholarList) {
+            if (scholar.getScore() > scoreThreshold) {
+                scholarsAboveThreshold.add(scholar);
+            }
+        }
+
+        return scholarsAboveThreshold;
+    }
+
+    public static void printScholars(LinkedList<Scholar> scholarList) {
+        for (Scholar scholar : scholarList) {
+            System.out.println("Name: " + scholar.getFullName() + ", Score: " + scholar.getScore());
+        }
+    }
+}
